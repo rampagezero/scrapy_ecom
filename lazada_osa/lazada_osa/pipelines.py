@@ -14,7 +14,7 @@ from sqlalchemy.orm import Session
 
 class LazadaOsaPipeline:
     def open_spider(self,item):
-        self.engine=create_engine('postgresql://user1:user1@27.112.78.177:5430')
+        self.engine=create_engine('postgresql://salesanalyst:**salesanalyst*@103.190.223.194:5432/scrapping_osa')
         Base.metadata.create_all(self.engine)
     
     def process_item(self, item, spider):

@@ -5,6 +5,7 @@ from scrapy.utils.project import get_project_settings
 from sys import path
 from scrapy.crawler import Crawler
 from scrapy.crawler import CrawlerProcess
+import gspread
 path.append('/home/dikapc/project/scrapy/tokped_osa/tokped_osa')
 from tokped_osa.items import TokpedOsaItem
 class TokpedbotSpider(scrapy.Spider):
@@ -12,21 +13,14 @@ class TokpedbotSpider(scrapy.Spider):
     download_delay=0.15
     allowed_domains = ['https://gql.tokopedia.com/'] 
     def __init__(self):
-        path_excel=rf"/home/dikapc/project/scrapy/tokped_osa/tokped_osa/Link Tokped Mix Png.xlsx"
-        df_osa=pd.read_excel(path_excel)    
-        df_osa=df_osa['Link']
-        # path_excel=[r"D:\Python Scripts\Project Sold Tokped\tokopedia_op.xlsx",r"D:\Python Scripts\Project Sold Tokped\tokopedia_op_jaksel.xlsx",r"D:\Python Scripts\Project Sold Tokped\tokopedia_op_surabaya.xlsx"]
-        # for i,j in enumerate(path_excel):
-        #     if i==0:
-        #         df_link=pd.read_excel(j)
-        #         list_tokped=df_link.iloc[:,2].to_list()
-        #     else:
-        #         df_link=pd.read_excel(j).iloc[:,2].to_list()
-        #         list_tokped.append(df_link)
-        # self.urls=list_tokped
-        # path_excel=rf"D:\Daily\OSA\Link_Price_Tokped_signify.xlsx"
-        # df_osa=pd.read_excel(path_excel)['Link']
-        self.urls=df_osa.to_list()
+        
+        
+        gc=gspread.service_account('/home/dikapc/dashboard-osa-069587892c63.json')
+        sh=gc.open_by_url('https://docs.google.com/spreadsheets/d/1keKW8fbYaX9CNI3oct1ON4mIz0wQEuxG0wedHUK1skw/edit?gid=0#gid=0')
+        worksheet=sh.get_worksheet(0)
+        data_link=pd.DataFrame(worksheet.get_all_records())
+        ids=data_link[(data_link['eCustomer'].str.contains('Tokopedia')) & (data_link['Availabilty']=='Active')].loc[:,'SKU URL']
+        self.urls=ids.to_list()
         
 
     def start_requests(self):
