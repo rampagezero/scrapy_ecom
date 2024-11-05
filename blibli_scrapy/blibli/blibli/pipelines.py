@@ -20,14 +20,14 @@ class BlibliPipeline:
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase,Mapped,mapped_column
+from sqlalchemy.orm import Mapped
 from blibli.blibli_table import Base,BlibliTable
 from sqlalchemy.orm import Session
 
 
 class BlibliPipeline:
     def open_spider(self,item):
-        self.engine=create_engine('postgresql://salesanalyst:**salesanalyst*@103.190.223.194:5432/scrapping_osa')
+        self.engine=create_engine('postgresql://salesanalyst:**salesanalyst*@192.168.33.182:5432/scrapping_osa')
         Base.metadata.create_all(self.engine)
     
     def process_item(self, item, spider):

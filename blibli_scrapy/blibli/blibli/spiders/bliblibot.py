@@ -6,7 +6,7 @@ from scrapy.crawler import Crawler
 from scrapy.crawler import CrawlerProcess
 import datetime
 from scrapy.utils.project import get_project_settings
-path.append('/home/dikapc/project/scrapy_old_v2/scrapy_ecom/blibli_scrapy/blibli')
+path.append(r'D:\Python Scripts\Project Scrapy\scrapy_ecom_new\scrapy_ecom\blibli_scrapy\blibli')
 from blibli.items import BlibliItem 
 
 class BliblibotSpider(scrapy.Spider):
