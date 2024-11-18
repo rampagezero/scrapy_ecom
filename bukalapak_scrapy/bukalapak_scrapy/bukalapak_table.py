@@ -1,13 +1,15 @@
-from sqlalchemy.orm import Mapped,DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import DateTime,Column,Integer,Text
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.sql import func
 import datetime
-class Base(DeclarativeBase):
-    pass
+Base=declarative_base()
+
 class BukaTable(Base):
     __tablename__='BukalapakData'
     id=Column(Integer,primary_key=True,auto_increment=True)
-    skuid:Mapped[str]
-    url:Mapped[str]
-    stock:Mapped[int]
-    date:Mapped[datetime.datetime]= Column(DateTime(timezone=True), server_default=func.now())
+    skuid=Column(String(50))
+    url=Column(String(50))
+    stock=Column(String(50))
+    date=Column(DateTime(timezone=True), server_default=func.now())
