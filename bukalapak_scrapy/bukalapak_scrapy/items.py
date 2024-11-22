@@ -15,4 +15,6 @@ class BukalapakItem(scrapy.Item):
     url=scrapy.Field()
     stock=scrapy.Field()
     skuid=scrapy.Field()
+    rating=scrapy.Field()
+    review=scrapy.Field()
     pass

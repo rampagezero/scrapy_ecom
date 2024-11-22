@@ -22,6 +22,8 @@ class BukalapakScrapyPipeline:
             table=BukaTable(skuid=item['skuid'],
                               url=item['url'],
                               stock=item['stock'],
+                              rating=item['rating'],
+                              review=item['review']
                               )
             session.add(table)
             session.commit()

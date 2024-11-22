@@ -48,6 +48,8 @@ class BukalapakSpider(scrapy.Spider):
             item['url']=data['data']['url']
             item['stock']=data['data']['stock']
             item['skuid']=response.meta.get('id')
+            item['rating']=str(data['data']['rating']['average_rate'])
+            item['review']=str(data['data']['rating']['user_count'])
             yield item
 
 settings=get_project_settings()

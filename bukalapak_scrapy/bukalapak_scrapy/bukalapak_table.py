@@ -7,9 +7,11 @@ import datetime
 Base=declarative_base()
 
 class BukaTable(Base):
-    __tablename__='BukalapakData'
+    __tablename__='BukalapakTable'
     id=Column(Integer,primary_key=True,auto_increment=True)
     skuid=Column(String(50))
     url=Column(String(50))
     stock=Column(String(50))
+    rating=Column(String(50))
+    review=Column(String(50))
     date=Column(DateTime(timezone=True), server_default=func.now())
